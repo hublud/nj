@@ -1,0 +1,55 @@
+export const siteConfig = {
+  name: "THE LOGION JOURNAL",
+  shortName: "LOGION",
+  domain: "logionjournal.com",
+  tagline: "A WORLD OF IDEAS, EXPRESSION & PERSPECTIVES",
+  description:
+    "The Logion Journal is a premier digital publication exploring ideas, intellectual conversations, wealth creation, creative expression, relationships, culture, spirituality, and personal growth.",
+  url: "http://logionjournal.com",
+  mainNav: [
+    { label: "Home", href: "/" },
+    { label: "Thinks", href: "/thinks" },
+    { label: "Wealth", href: "/wealth" },
+    { label: "Creative", href: "/creative" },
+    { label: "Living", href: "/living" },
+    { label: "Relations", href: "/relations" },
+    { label: "Conversations", href: "/conversations" },
+    { label: "Spirit", href: "/spirit" },
+    { label: "Career", href: "/career" },
+    { label: "Culture", href: "/culture" },
+    { label: "Unfiltered", href: "/unfiltered" },
+    { label: "Entertainment", href: "/entertainment" },
+    { label: "Coaching", href: "/coaching" },
+  ],
+  footerQuickLinks: [
+    { label: "About The Journal", href: "/about" },
+    { label: "Editorial Vision", href: "/about#vision" },
+    { label: "Write for Us / Submissions", href: "/contact?tab=submit" },
+    { label: "Coaching & Mentorship", href: "/coaching" },
+    { label: "Advertise & Partner", href: "/contact?tab=advertise" },
+    { label: "Contact Editorial Desk", href: "/contact" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms & Conditions", href: "/terms" },
+  ],
+  socials: [
+    { name: "Facebook", href: "https://facebook.com", icon: "Facebook", color: "hover:text-blue-500" },
+    { name: "Instagram", href: "https://instagram.com", icon: "Instagram", color: "hover:text-amber-400" },
+    { name: "X (Twitter)", href: "https://twitter.com", icon: "Twitter", color: "hover:text-sky-400" },
+    { name: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin", color: "hover:text-blue-400" },
+    { name: "YouTube", href: "https://youtube.com", icon: "Youtube", color: "hover:text-red-500" },
+    { name: "WhatsApp", href: "https://wa.me/2349157892212", icon: "MessageCircle", color: "hover:text-emerald-400" },
+  ],
+  contactEmail: "logionjournal@gmail.com",
+  contactPhone: "07044918098",
+  contactPhoneFormatted: "+234 704 491 8098",
+  phoneNumbers: ["07044918098"],
+  whatsappNumber: "09157892212",
+  whatsappNumberFormatted: "+234 915 789 2212",
+  whatsappLink: "https://wa.me/2349157892212",
+  colors: {
+    primary: "#0e2a5e", // Deep Imperial Blue
+    secondary: "#c59b27", // Luminous Antique Gold
+    accentPurple: "#6d28d9", // Regal Purple
+    bgLight: "#f8fafc",
+  },
+};

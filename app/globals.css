@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Brand Primary: Imperial Deep Blue */
+    --primary-blue: #0f274a;
+    --primary-blue-hover: #1e3a8a;
+    --primary-blue-light: #eff6ff;
+    --primary-blue-border: #bfdbfe;
+
+    /* Brand Gold: Luminous Antique & Pure Gold */
+    --gold-primary: #c59b27;
+    --gold-hover: #b4891b;
+    --gold-light: #fef9c3;
+    --gold-border: #fde047;
+    --gold-dark: #854d0e;
+
+    /* Touch of Purple: Regal Purple & Violet */
+    --purple-accent: #7c3aed;
+    --purple-deep: #4c1d95;
+    --purple-light: #f3e8ff;
+    --purple-border: #ddd6fe;
+
+    /* Backgrounds & Text */
+    --bg-page: #f8fafc;
+    --brand-dark: #091322;
+    --brand-gray: #475569;
+  }
+}
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Gold foil gradient effect */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #d4af37 0%, #fef08a 45%, #b8860b 80%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #c59b27 0%, #eab308 50%, #b45309 100%);
+}
+
+.purple-gold-gradient {
+  background: linear-gradient(135deg, #0f274a 0%, #4c1d95 50%, #c59b27 100%);
+}
+
+.brand-hero-gradient {
+  background: linear-gradient(135deg, #0a192f 0%, #1e3a8a 45%, #3b0764 80%, #7c3aed 100%);
+}
+
+/* Custom scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
