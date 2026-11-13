@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link as LinkIcon, Check } from "lucide-react";
-import { WhatsAppIcon, TwitterXIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { WhatsAppIcon, TwitterXIcon, FacebookIcon, TikTokIcon } from "@/components/ui/SocialIcons";
 
 interface SocialShareProps {
   url?: string;
@@ -32,6 +32,7 @@ export const SocialShare: React.FC<SocialShareProps> = ({
   const shareFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
     url
   )}`;
+  const shareTikTok = `https://www.tiktok.com/share?url=${encodeURIComponent(url)}`;
 
   return (
     <div className="flex items-center flex-wrap gap-2 py-4 border-y border-slate-200 my-6">
@@ -70,6 +71,23 @@ export const SocialShare: React.FC<SocialShareProps> = ({
       >
         <FacebookIcon className="w-3.5 h-3.5" />
         <span>Facebook</span>
+      </a>
+
+      {/* TikTok */}
+      <a
+        href={shareTikTok}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => {
+          if (typeof navigator !== "undefined" && navigator.clipboard) {
+            navigator.clipboard.writeText(url);
+          }
+        }}
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-black hover:bg-neutral-800 text-white text-xs font-bold transition-colors shadow-xs"
+        title="Share to TikTok (link automatically copied)"
+      >
+        <TikTokIcon className="w-3.5 h-3.5" />
+        <span>TikTok</span>
       </a>
 
       {/* Copy Link */}

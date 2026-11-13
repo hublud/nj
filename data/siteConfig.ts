@@ -35,6 +35,7 @@ export const siteConfig = {
     { name: "Facebook", href: "https://facebook.com", icon: "Facebook", color: "hover:text-blue-500" },
     { name: "Instagram", href: "https://instagram.com", icon: "Instagram", color: "hover:text-amber-400" },
     { name: "X (Twitter)", href: "https://twitter.com", icon: "Twitter", color: "hover:text-sky-400" },
+    { name: "TikTok", href: "https://tiktok.com/@logionjournal", icon: "TikTok", color: "hover:text-pink-400" },
     { name: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin", color: "hover:text-blue-400" },
     { name: "YouTube", href: "https://youtube.com", icon: "Youtube", color: "hover:text-red-500" },
     { name: "WhatsApp", href: "https://wa.me/2349157892212", icon: "MessageCircle", color: "hover:text-emerald-400" },
