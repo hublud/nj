@@ -97,7 +97,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             setIsOpen(true);
           }}
           placeholder={placeholder}
-          className="w-full py-2 px-1 text-sm sm:text-base text-slate-900 bg-transparent placeholder-slate-400 focus:outline-none"
+          className="w-full min-w-0 flex-1 py-2 px-1 text-sm sm:text-base text-slate-900 bg-transparent placeholder-slate-400 focus:outline-none"
         />
 
         {query && (

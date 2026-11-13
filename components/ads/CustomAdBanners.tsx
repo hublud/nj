@@ -18,18 +18,18 @@ export const TopLandscapeAd: React.FC = () => {
           className="w-full block group overflow-hidden rounded-xl sm:rounded-2xl border border-amber-400/40 shadow-sm hover:shadow-md transition-all relative bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-950 text-white p-4 sm:p-6"
         >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3 sm:space-x-4 text-center sm:text-left">
+            <div className="flex items-center space-x-3 sm:space-x-4 text-center sm:text-left min-w-0 flex-1">
               <div className="w-12 h-12 rounded-xl bg-amber-400/20 border border-amber-400 flex items-center justify-center text-amber-300 shrink-0">
                 <Sparkles className="w-6 h-6 text-amber-300" />
               </div>
-              <div>
+              <div className="min-w-0 flex-1">
                 <span className="text-[10px] uppercase tracking-widest font-black text-amber-400">
                   THE LOGION JOURNAL SPONSORSHIP
                 </span>
-                <h3 className="text-base sm:text-lg font-black text-white tracking-tight">
+                <h3 className="text-base sm:text-lg font-black text-white tracking-tight break-words">
                   Reach Intellectual Minds, Creators &amp; Professionals Across Africa
                 </h3>
-                <p className="text-xs text-slate-300 mt-0.5">
+                <p className="text-xs text-slate-300 mt-0.5 break-words">
                   Partner with us for brand features, guest thought-leadership, and event spotlights.
                 </p>
               </div>

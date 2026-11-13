@@ -65,11 +65,11 @@ export const WhatsAppServicesBanner: React.FC = () => {
                     : "bg-slate-900/70 border-slate-700/60 hover:border-amber-400/60 hover:bg-slate-900"
                 }`}
               >
-                <div className="flex items-start space-x-3 z-10">
+                <div className="flex items-start space-x-3 z-10 min-w-0 flex-1">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-slate-950 shadow-sm shrink-0 group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5 text-blue-950" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span
                       className={`inline-block text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full mb-1 ${item.badgeColor}`}
                     >

@@ -79,9 +79,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="overflow-x-hidden max-w-full" suppressHydrationWarning>
       <body
-        className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-400 selection:text-blue-950"
+        className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-400 selection:text-blue-950 overflow-x-hidden max-w-full"
         suppressHydrationWarning
       >
         {/* Top Sponsored Ad Banner */}

@@ -40,11 +40,11 @@ export const TopAdBanner: React.FC<TopAdBannerProps> = ({ className = "" }) => {
           {/* Subtle animated light reflection */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform" />
 
-          <div className="flex items-center space-x-3 sm:space-x-4 z-10">
+          <div className="flex items-center space-x-3 sm:space-x-4 z-10 min-w-0 flex-1">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-blue-500/30 border border-blue-400/40 flex items-center justify-center shrink-0">
               <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-300" />
             </div>
-            <div>
+            <div className="min-w-0 flex-1">
               <div className="text-xs sm:text-sm font-extrabold uppercase tracking-wide text-yellow-300 line-clamp-1">
                 {title}
               </div>

@@ -24,6 +24,7 @@ import {
   Film,
   GraduationCap,
   ArrowRight,
+  X,
 } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import { JOURNAL_CATEGORIES } from "@/data/categories";
@@ -386,15 +387,24 @@ export const Header: React.FC = () => {
 
       {/* Quick Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 border-2 border-amber-400 relative">
-            <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="w-5 h-5 text-amber-500" />
-              <h3 className="text-lg font-black text-blue-950 font-serif">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto overflow-x-hidden">
+          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-4 sm:p-6 border-2 border-amber-400 relative my-auto">
+            <button
+              type="button"
+              onClick={() => setShowSearchModal(false)}
+              className="absolute top-3 right-3 p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              aria-label="Close dialog"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-2 pr-6">
+              <BookOpen className="w-5 h-5 text-amber-500 shrink-0" />
+              <h3 className="text-base sm:text-lg font-black text-blue-950 font-serif leading-tight">
                 Search The Logion Journal
               </h3>
             </div>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-500 mb-3.5 leading-relaxed">
               Explore essays, intellectual discussions, wealth tips, creative stories &amp; perspectives.
             </p>
             <form onSubmit={handleModalSearch} className="flex gap-2">
@@ -404,20 +414,23 @@ export const Header: React.FC = () => {
                 onChange={(e) => setSearchModalQuery(e.target.value)}
                 placeholder="Search ideas, philosophy, wealth, relations..."
                 autoFocus
-                className="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 text-slate-900"
+                className="flex-1 min-w-0 px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 text-slate-900"
               />
               <button
                 type="submit"
-                className="bg-blue-950 hover:bg-blue-900 text-amber-300 font-black text-sm px-5 py-2.5 rounded-xl border border-amber-400/50 shadow-sm"
+                className="bg-blue-950 hover:bg-blue-900 text-amber-300 font-black text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl border border-amber-400/50 shadow-sm shrink-0 cursor-pointer active:scale-95"
               >
                 Search
               </button>
             </form>
-            <div className="mt-4 flex items-center justify-between text-xs text-slate-500">
-              <span>Popular: The Logion Paradox • Making Money Online • Self-Discovery</span>
+            <div className="mt-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+              <p className="text-[11px] sm:text-xs text-slate-500 leading-snug">
+                <strong className="text-slate-700">Popular:</strong> The Logion Paradox • Making Money Online • Self-Discovery
+              </p>
               <button
+                type="button"
                 onClick={() => setShowSearchModal(false)}
-                className="text-slate-400 hover:text-slate-700 underline"
+                className="text-slate-400 hover:text-slate-700 underline text-right self-end sm:self-auto shrink-0 text-xs"
               >
                 Close
               </button>
