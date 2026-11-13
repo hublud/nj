@@ -217,7 +217,7 @@ export default function ArticleDetailsPage({ params }: ArticlePageProps) {
               return p.replace(/<[^>]+>/g, '').trim();
             })
             .filter((p) => {
-              if (!p || p.length < 5 || p.includes("Enter the first paragraph")) return false;
+              if (!p || p.length < 1 || p.includes("Enter the first paragraph")) return false;
               // If paragraph is just an iframe or video URL line, discard it since dedicated video player will render it
               if (p.includes("youtube.com") || p.includes("youtu.be") || p.match(/^https?:\/\/[^\s]+\.(mp4|webm|mov|mkv)$/i)) {
                 return false;
@@ -340,7 +340,7 @@ export default function ArticleDetailsPage({ params }: ArticlePageProps) {
                           />
                         </div>
                       ) : (
-                        <p>{para}</p>
+                        <p className="whitespace-pre-line leading-relaxed text-slate-700">{para}</p>
                       )}
                       {/* Insert Ad after 2nd paragraph */}
                       {idx === 1 && <InArticleAd />}

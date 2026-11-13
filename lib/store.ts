@@ -443,58 +443,101 @@ class DataStore {
   }
 
   public async updateArticle(idOrSlug: string, updates: Partial<Article>): Promise<boolean> {
+    const isUUID = (str?: string) =>
+      typeof str === "string" &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+
     const idx = this.articles.findIndex((a) => a.id === idOrSlug || a.slug === idOrSlug);
-    if (idx === -1) return false;
+    let originalArticle: Article | undefined;
 
-    this.articles[idx] = { ...this.articles[idx], ...updates };
-    this.saveLocally();
-    this.notify();
+    if (idx !== -1) {
+      originalArticle = { ...this.articles[idx] };
+      this.articles[idx] = { ...this.articles[idx], ...updates };
+      this.saveLocally();
+      this.notify();
+    }
 
-    const currentArticle = this.articles[idx];
-    const allTags: string[] = [...(currentArticle.tags || [])];
-    if (currentArticle.mediaList && currentArticle.mediaList.length > 0) {
-      currentArticle.mediaList.forEach((m) => {
-        if (m.url && m.url !== currentArticle.image) {
+    const currentArticle = idx !== -1 ? this.articles[idx] : null;
+
+    const allTags: string[] = [
+      ...((currentArticle?.tags || updates.tags) || []),
+    ];
+    const mediaList = currentArticle?.mediaList || updates.mediaList;
+    const mainImg = currentArticle?.image || updates.image;
+    if (mediaList && mediaList.length > 0) {
+      mediaList.forEach((m) => {
+        if (m.url && m.url !== mainImg) {
           const entry = `MEDIA:${m.url}`;
           if (!allTags.includes(entry)) allTags.push(entry);
         }
       });
     }
 
+    const targetUuid = originalArticle && isUUID(originalArticle.id)
+      ? originalArticle.id
+      : isUUID(idOrSlug)
+      ? idOrSlug
+      : null;
+
+    const originalSlug = originalArticle?.slug || (isUUID(idOrSlug) ? null : idOrSlug);
+
     try {
-      await this.supabase
-        .from("articles")
-        .update({
-          title: updates.title,
-          slug: updates.slug,
-          excerpt: updates.excerpt,
-          content: updates.content,
-          image: updates.image,
-          category_name: updates.category,
-          category_slug: updates.categorySlug,
-          location: updates.location,
-          read_time: updates.readTime,
-          featured: updates.featured,
-          tags: allTags,
-          updated_at: new Date().toISOString(),
-        })
-        .or(`id.eq.${idOrSlug},slug.eq.${idOrSlug}`);
+      const payload: Record<string, any> = {
+        updated_at: new Date().toISOString(),
+      };
+      if (updates.title !== undefined || currentArticle?.title) payload.title = updates.title ?? currentArticle?.title;
+      if (updates.slug !== undefined || currentArticle?.slug) payload.slug = updates.slug ?? currentArticle?.slug;
+      if (updates.excerpt !== undefined || currentArticle?.excerpt) payload.excerpt = updates.excerpt ?? currentArticle?.excerpt;
+      if (updates.content !== undefined || currentArticle?.content) payload.content = updates.content ?? currentArticle?.content;
+      if (updates.image !== undefined || currentArticle?.image) payload.image = updates.image ?? currentArticle?.image;
+      if (updates.category !== undefined || currentArticle?.category) payload.category_name = updates.category ?? currentArticle?.category;
+      if (updates.categorySlug !== undefined || currentArticle?.categorySlug) payload.category_slug = updates.categorySlug ?? currentArticle?.categorySlug;
+      if (updates.location !== undefined || currentArticle?.location) payload.location = updates.location ?? currentArticle?.location;
+      if (updates.readTime !== undefined || currentArticle?.readTime) payload.read_time = updates.readTime ?? currentArticle?.readTime;
+      if (updates.featured !== undefined || currentArticle?.featured !== undefined) payload.featured = updates.featured ?? currentArticle?.featured;
+      if (allTags.length > 0) payload.tags = allTags;
+
+      let query = this.supabase.from("articles").update(payload);
+
+      if (targetUuid) {
+        const { error } = await query.eq("id", targetUuid);
+        if (error) console.error("Supabase update error by id:", error);
+      } else if (originalSlug) {
+        const { error } = await query.eq("slug", originalSlug);
+        if (error) console.error("Supabase update error by slug:", error);
+      }
     } catch (e) {
-      console.error("Supabase update error:", e);
+      console.error("Supabase update exception:", e);
     }
 
     return true;
   }
 
   public async deleteArticle(idOrSlug: string): Promise<boolean> {
+    const isUUID = (str?: string) =>
+      typeof str === "string" &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+
+    const articleToDelete = this.articles.find((a) => a.id === idOrSlug || a.slug === idOrSlug);
+    const targetUuid = articleToDelete && isUUID(articleToDelete.id)
+      ? articleToDelete.id
+      : isUUID(idOrSlug)
+      ? idOrSlug
+      : null;
+    const targetSlug = articleToDelete?.slug || (!isUUID(idOrSlug) ? idOrSlug : null);
+
     this.articles = this.articles.filter((a) => a.id !== idOrSlug && a.slug !== idOrSlug);
     this.saveLocally();
     this.notify();
 
     try {
-      await this.supabase.from("articles").delete().or(`id.eq.${idOrSlug},slug.eq.${idOrSlug}`);
+      if (targetUuid) {
+        await this.supabase.from("articles").delete().eq("id", targetUuid);
+      } else if (targetSlug) {
+        await this.supabase.from("articles").delete().eq("slug", targetSlug);
+      }
     } catch (e) {
-      console.error("Supabase delete error:", e);
+      console.error("Supabase delete exception:", e);
     }
 
     return true;
