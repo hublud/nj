@@ -138,76 +138,68 @@ export const DualPromoBanners: React.FC<{ placementTitle?: string }> = ({
 
 /**
  * Responsive Header Banner Ad placed directly below the Search Bar.
- * Renders the horizontal landscape Logion Journal 3D Gold & Red Banner.
+ * Compact, sleek, and well-proportioned so it doesn't dominate the viewport.
  */
 export const LogionHeaderBannerAd: React.FC = () => {
   return (
-    <section className="w-full my-3 sm:my-5" aria-label="Official Logion Journal Header Banner">
-      <div className="max-w-5xl mx-auto px-1 sm:px-2">
-        {/* Subtle Label Bar */}
-        <div className="flex items-center justify-between mb-1.5 px-1">
-          <span className="text-[10px] sm:text-xs uppercase font-black tracking-widest text-blue-950 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-            <span>OFFICIAL LOGION JOURNAL ANNOUNCEMENT</span>
+    <section className="w-full my-2 sm:my-3" aria-label="Official Logion Journal Header Banner">
+      <div className="max-w-md sm:max-w-lg mx-auto px-3 sm:px-4">
+        {/* Subtle Micro-Label Bar */}
+        <div className="flex items-center justify-between mb-1 px-1">
+          <span className="text-[10px] uppercase font-black tracking-widest text-slate-500 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-amber-500" />
+            <span>OFFICIAL ANNOUNCEMENT</span>
           </span>
           <a
-            href="https://wa.me/2349157892212?text=Hello%20Logion%20Journal,%20I%20am%20inquiring%20about%20your%20services"
+            href="https://wa.me/2349157892212?text=Hello%20Logion%20Journal"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] sm:text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 transition-colors"
+            className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-0.5 transition-colors"
           >
-            <MessageCircle className="w-3.5 h-3.5 text-emerald-500" />
-            <span>WhatsApp: 09157892212</span>
+            <MessageCircle className="w-3 h-3 text-emerald-500" />
+            <span>09157892212</span>
           </a>
         </div>
 
-        {/* Responsive Banner Card */}
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-400/50 shadow-md hover:shadow-xl transition-all duration-300 bg-white group">
+        {/* Compact Responsive Banner Card */}
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden border border-amber-400/60 shadow-sm hover:shadow-md transition-all duration-300 bg-white group">
           <a
             href="https://wa.me/2349157892212?text=Hello%20Logion%20Journal,%20I%20am%20inquiring%20about%20your%20services"
             target="_blank"
             rel="noopener noreferrer"
-            className="block relative overflow-hidden bg-slate-950"
+            className="block relative overflow-hidden bg-gradient-to-b from-slate-50 to-white"
             title="Connect with Logion Journal on WhatsApp"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/ads/logion_header_banner.jpg"
-              alt="Logion Journal - Where Ideas Find Expression. Think. Create. Become. Talent is not enough. We transform your dreams to reality. Visit: Logionjournal.com, Email: logionjournal@gmail.com, Phone: 07044918098, WhatsApp: 09157892212"
-              className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500 block"
+              alt="Logion Journal - Where Ideas Find Expression. Think. Create. Become. Talent is not enough. We transform your dreams to reality."
+              className="w-full h-auto max-h-[180px] sm:max-h-[220px] object-contain mx-auto group-hover:scale-[1.01] transition-transform duration-300 block"
             />
           </a>
 
-          {/* Quick Contact & Action Ribbon */}
-          <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 text-white px-3 sm:px-6 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-2.5 text-xs border-t border-amber-400/30">
-            <div className="flex items-center gap-2 text-slate-300 font-medium text-[11px] sm:text-xs">
-              <span className="font-black text-amber-400 uppercase tracking-wider">Direct Reach:</span>
-              <span className="hidden sm:inline">Talent is not enough. We transform your dreams to reality.</span>
-            </div>
+          {/* Sleek Compact Action Ribbon */}
+          <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 text-white px-3 py-1.5 sm:py-2 flex items-center justify-between gap-2 text-xs border-t border-amber-400/30">
+            <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider truncate">
+              Think • Create • Become
+            </span>
 
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5 shrink-0">
               <a
                 href="https://wa.me/2349157892212?text=Hello%20Logion%20Journal"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-1.5 rounded-lg text-xs transition-all active:scale-95 shadow-xs"
+                className="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1 rounded text-[11px] transition-all active:scale-95 shadow-2xs"
               >
-                <MessageCircle className="w-3.5 h-3.5" />
-                <span>WhatsApp (09157892212)</span>
+                <MessageCircle className="w-3 h-3" />
+                <span>WhatsApp</span>
               </a>
               <a
                 href="tel:07044918098"
-                className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-3 py-1.5 rounded-lg text-xs border border-slate-700 transition-all active:scale-95"
+                className="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-2 py-1 rounded text-[11px] border border-slate-700 transition-all active:scale-95"
               >
-                <Phone className="w-3.5 h-3.5 text-amber-400" />
-                <span>Call 07044918098</span>
-              </a>
-              <a
-                href="mailto:logionjournal@gmail.com"
-                className="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-3 py-1.5 rounded-lg text-xs border border-slate-700 transition-all active:scale-95 hidden md:inline-flex"
-              >
-                <Mail className="w-3.5 h-3.5 text-blue-400" />
-                <span>Email</span>
+                <Phone className="w-3 h-3 text-amber-400" />
+                <span>Call</span>
               </a>
             </div>
           </div>
@@ -251,7 +243,7 @@ export const LogionFooterBannerAd: React.FC = () => {
                 href="https://wa.me/2349157892212?text=Hello%20Logion%20Journal,%20I%20am%20inquiring%20about%20your%20services"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/50 group w-full max-w-sm sm:max-w-md"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/50 group w-full max-w-[280px] sm:max-w-[320px]"
                 title="Open Logion Journal in WhatsApp"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
