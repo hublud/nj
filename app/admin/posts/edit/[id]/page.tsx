@@ -27,7 +27,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
   const [excerpt, setExcerpt] = useState("");
   const [categorySlug, setCategorySlug] = useState("news");
   const [location, setLocation] = useState("Lagos");
-  const [authorName, setAuthorName] = useState("FunAllTheWay Editorial");
+  const [authorName, setAuthorName] = useState("The Logion Editorial Board");
   const [readTime, setReadTime] = useState("3 min read");
   const [featured, setFeatured] = useState(false);
   const [imageUrl, setImageUrl] = useState("");

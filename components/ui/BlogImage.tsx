@@ -63,7 +63,7 @@ export const BlogImage: React.FC<BlogImageProps> = ({
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={imageSrc}
-          alt={alt || "Fun All The Way Media"}
+          alt={alt || "The Logion Journal Media"}
           loading={priority ? "eager" : "lazy"}
           onError={() => setHasError(true)}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

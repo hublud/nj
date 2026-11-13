@@ -199,7 +199,7 @@ export default function ArticleDetailsPage({ params }: ArticlePageProps) {
             .replace(/^\[?(?:Gospel\s+)?Mixtape\]?\s*(?:Mp3:?-?)?\s*/i, '')
             .replace(/^Download\s+(?:Mixtape\s+)?(?:Mp3:?-?)?\s*/i, '')
             .trim();
-          let artistName = "FunAllTheWay Exclusives";
+          let artistName = "The Logion Journal Editorial";
           if (trackTitle.includes(" - ")) {
             const parts = trackTitle.split(" - ");
             artistName = `By ${parts[0].trim()}`;
@@ -230,11 +230,11 @@ export default function ArticleDetailsPage({ params }: ArticlePageProps) {
               return true;
             });
 
-          // Branded native download URL on FunAllTheWay (prevents cross-origin blocking & hides external URLs)
+          // Branded native download URL on Logion Journal (prevents cross-origin blocking & hides external URLs)
           const brandedDownloadUrl = audioMp3Url
             ? `/api/download?url=${encodeURIComponent(audioMp3Url)}&title=${encodeURIComponent(trackTitle || article.title)}`
             : null;
-          const downloadFilename = `${(trackTitle || article.title).replace(/[^a-zA-Z0-9_-]/g, "-")}-FunAllTheWay.mp3`;
+          const downloadFilename = `${(trackTitle || article.title).replace(/[^a-zA-Z0-9_-]/g, "-")}-LogionJournal.mp3`;
 
           const hasAudioPlayer = Boolean(audioMp3Url) || Boolean(audioStreamUrl);
 
@@ -379,7 +379,7 @@ export default function ArticleDetailsPage({ params }: ArticlePageProps) {
                     {/* Brand / Logo */}
                     <div className="text-right flex-shrink-0">
                       <span className="text-xs sm:text-sm font-black tracking-widest text-white/90 uppercase font-mono">
-                        FUNALLTHEWAY
+                        LOGION JOURNAL
                       </span>
                     </div>
                   </div>
@@ -587,7 +587,7 @@ export default function ArticleDetailsPage({ params }: ArticlePageProps) {
         <SocialShare title={article.title} />
 
         {/* Middle Promotional Showcase Banners */}
-        <DualPromoBanners placementTitle="FUN ALL THE WAY LIMITED SERVICES & PACKAGES" />
+        <DualPromoBanners placementTitle="FEATURED INITIATIVES & EDITORIAL CALLS" />
 
         {/* Previous / Next Article Navigation */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-slate-200">

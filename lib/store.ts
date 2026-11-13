@@ -556,7 +556,7 @@ class DataStore {
       this.ads.push({
         id: `ad_${Date.now()}`,
         slotType: slotType as any,
-        title: updates.title || "Promote on FunAllTheWay",
+        title: updates.title || "Promote on The Logion Journal",
         subtitle: updates.subtitle || "",
         destinationUrl: updates.destinationUrl || "/contact",
         buttonText: updates.buttonText || "GET STARTED",

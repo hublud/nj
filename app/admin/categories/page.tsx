@@ -47,7 +47,7 @@ export default function AdminCategoriesPage() {
     addCategory({
       name: name.trim(),
       slug: slug.trim() || name.toLowerCase().replace(/\s+/g, "-"),
-      description: description.trim() || `The latest ${name.trim()} stories on FunAllTheWay.`,
+      description: description.trim() || `The latest ${name.trim()} perspectives on The Logion Journal.`,
       isPrimaryIcon: isPrimary,
     });
 

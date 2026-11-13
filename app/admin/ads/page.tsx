@@ -15,7 +15,7 @@ export default function AdminAdsPage() {
   const currentAd = ads.find((a) => a.slotType === selectedSlot) || {
     id: selectedSlot,
     slotType: selectedSlot,
-    title: "Promote Your Brand on FunAllTheWay",
+    title: "Promote Your Brand on The Logion Journal",
     subtitle: "High-visibility banner with active reader reach.",
     destinationUrl: "/contact?tab=advertise",
     buttonText: "GET STARTED",
@@ -210,7 +210,7 @@ export default function AdminAdsPage() {
             </div>
 
             <MediaUploader
-              folder="funalltheway/ads"
+              folder="logionjournal/ads"
               initialUrl={imageUrl}
               onUploadSuccess={(url) => setImageUrl(url)}
             />

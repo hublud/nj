@@ -3,15 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 /**
- * FunAllTheWay Native Media Download Streamer
+ * The Logion Journal Native Media Streamer
  * 
  * 1. Overcomes cross-origin browser security policy:
  *    Modern browsers ignore HTML5 `download` attribute on third-party URLs.
  *    By serving from same-origin with `Content-Disposition: attachment`, 
  *    every mobile device and PC downloads the file directly.
  * 2. Whitelabel branding:
- *    Users never see external URLs like 9jaflaver.com in their browser or downloads folder.
- *    The downloaded file is neatly named e.g. "Clock-It-Mix-DJ-SweetRecord-FunAllTheWay.mp3".
+ *    Users never see external URLs in their browser or downloads folder.
+ *    The downloaded file is neatly named e.g. "Track-Title-LogionJournal.mp3".
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
