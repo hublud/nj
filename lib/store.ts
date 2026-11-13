@@ -140,15 +140,19 @@ class DataStore {
         .order("created_at", { ascending: false });
 
       if (!artErr && dbArticles) {
-        this.articles = dbArticles.map((row: any) => {
+        const fetchedArticles: Article[] = dbArticles.map((row: any) => {
           const rawTags: string[] = row.tags || [];
           const mediaTagEntries = rawTags.filter((t: string) => t.startsWith("MEDIA:"));
           const streamTagEntries = rawTags.filter((t: string) => t.startsWith("STREAM:"));
+          const locTag = rawTags.find((t: string) => t.startsWith("LOC:"));
+          const location = locTag ? locTag.replace("LOC:", "").trim() : (row.location || "Global");
+
           const userTags = rawTags.filter(
             (t: string) =>
               !t.startsWith("MEDIA:") &&
               !t.startsWith("STREAM:") &&
               !t.startsWith("SRC:") &&
+              !t.startsWith("LOC:") &&
               !t.includes("http://") &&
               !t.includes("https://")
           );
@@ -266,7 +270,7 @@ class DataStore {
             streamUrl,
             category: row.category_name || row.category || "News",
             categorySlug: row.category_slug || "news",
-            location: row.location || "Lagos",
+            location: location,
             author: {
               name: row.author_name || "Editor",
               avatar:
@@ -289,6 +293,13 @@ class DataStore {
             mediaList: mediaList.length > 0 ? mediaList : undefined,
           };
         });
+
+        // Preserve any pending local articles that haven't synced to Supabase yet
+        const pendingLocal = this.articles.filter((a) =>
+          a.id.startsWith("post_") && !fetchedArticles.some((f) => f.slug === a.slug)
+        );
+
+        this.articles = [...pendingLocal, ...fetchedArticles];
         this.saveLocally();
       }
 
@@ -399,6 +410,9 @@ class DataStore {
     this.notify();
 
     const allTags: string[] = [...(newArticle.tags || [])];
+    if (newArticle.location) {
+      allTags.push(`LOC:${newArticle.location}`);
+    }
     if (newArticle.mediaList && newArticle.mediaList.length > 0) {
       newArticle.mediaList.forEach((m) => {
         if (m.url && m.url !== newArticle.image) {
@@ -419,10 +433,9 @@ class DataStore {
           image: newArticle.image,
           category_name: newArticle.category,
           category_slug: newArticle.categorySlug,
-          location: newArticle.location,
-          author_name: newArticle.author.name,
-          author_avatar: newArticle.author.avatar,
-          author_role: newArticle.author.role,
+          author_name: newArticle.author?.name || "The Logion Journal Editorial",
+          author_avatar: newArticle.author?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+          author_role: newArticle.author?.role || "Contributing Essayist",
           read_time: newArticle.readTime,
           featured: newArticle.featured,
           tags: allTags,
@@ -431,12 +444,18 @@ class DataStore {
 
       if (!insertErr && data && data.length > 0) {
         newArticle.id = data[0].id;
+        const currentIdx = this.articles.findIndex((a) => a.slug === newArticle.slug);
+        if (currentIdx !== -1) {
+          this.articles[currentIdx].id = data[0].id;
+        }
         this.saveLocally();
       } else if (insertErr) {
         console.error("Supabase insert error:", insertErr);
+        throw new Error(insertErr.message || "Failed to persist article to Supabase");
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error("Supabase insert exception:", e);
+      throw e;
     }
 
     return newArticle;
@@ -462,6 +481,15 @@ class DataStore {
     const allTags: string[] = [
       ...((currentArticle?.tags || updates.tags) || []),
     ];
+    const loc = updates.location || currentArticle?.location;
+    if (loc) {
+      const locIdx = allTags.findIndex((t) => t.startsWith("LOC:"));
+      if (locIdx !== -1) {
+        allTags[locIdx] = `LOC:${loc}`;
+      } else {
+        allTags.push(`LOC:${loc}`);
+      }
+    }
     const mediaList = currentArticle?.mediaList || updates.mediaList;
     const mainImg = currentArticle?.image || updates.image;
     if (mediaList && mediaList.length > 0) {
@@ -492,7 +520,6 @@ class DataStore {
       if (updates.image !== undefined || currentArticle?.image) payload.image = updates.image ?? currentArticle?.image;
       if (updates.category !== undefined || currentArticle?.category) payload.category_name = updates.category ?? currentArticle?.category;
       if (updates.categorySlug !== undefined || currentArticle?.categorySlug) payload.category_slug = updates.categorySlug ?? currentArticle?.categorySlug;
-      if (updates.location !== undefined || currentArticle?.location) payload.location = updates.location ?? currentArticle?.location;
       if (updates.readTime !== undefined || currentArticle?.readTime) payload.read_time = updates.readTime ?? currentArticle?.readTime;
       if (updates.featured !== undefined || currentArticle?.featured !== undefined) payload.featured = updates.featured ?? currentArticle?.featured;
       if (allTags.length > 0) payload.tags = allTags;

@@ -223,31 +223,36 @@ export default function EditPostPage({ params }: EditPostPageProps) {
     const finalExcerpt =
       excerpt.trim() || (paragraphs[0] ? paragraphs[0].slice(0, 160) : "");
 
-    await updateArticle(id, {
-      title: title.trim(),
-      slug: slug.trim() || originalSlug || `story-${Date.now()}`,
-      excerpt: finalExcerpt,
-      content: paragraphs,
-      image: primaryMedia,
-      mediaList: allMediaItems,
-      category: catName,
-      categorySlug: categorySlug,
-      location: location.trim() || "Global",
-      author: {
-        name: authorName.trim() || "The Logion Journal Editorial",
-        avatar:
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-        role: "Contributing Essayist",
-      },
-      readTime: readTime || stats.readingTime || "3 min read",
-      featured: featured,
-    });
+    try {
+      await updateArticle(id, {
+        title: title.trim(),
+        slug: slug.trim() || originalSlug || `story-${Date.now()}`,
+        excerpt: finalExcerpt,
+        content: paragraphs,
+        image: primaryMedia,
+        mediaList: allMediaItems,
+        category: catName,
+        categorySlug: categorySlug,
+        location: location.trim() || "Global",
+        author: {
+          name: authorName.trim() || "The Logion Journal Editorial",
+          avatar:
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+          role: "Contributing Essayist",
+        },
+        readTime: readTime || stats.readingTime || "3 min read",
+        featured: featured,
+      });
 
-    setIsSubmitting(false);
-    setSuccessMessage("Story updated successfully!");
-    setTimeout(() => {
-      router.push("/admin/posts");
-    }, 1000);
+      setIsSubmitting(false);
+      setSuccessMessage("Story updated successfully!");
+      setTimeout(() => {
+        router.push("/admin/posts");
+      }, 1000);
+    } catch (err: any) {
+      setIsSubmitting(false);
+      alert(`Could not update story: ${err?.message || "Database connection error"}. Please try again.`);
+    }
   };
 
   if (isLoadingArticle) {

@@ -100,27 +100,32 @@ export default function CreatePostPage() {
     // Auto-fallback excerpt to first 160 characters if empty
     const finalExcerpt = excerpt.trim() || (paragraphs[0] ? paragraphs[0].slice(0, 160) : "");
 
-    await addArticle({
-      title: title.trim(),
-      slug: slug.trim() || `story-${Date.now()}`,
-      excerpt: finalExcerpt,
-      content: paragraphs,
-      image: primaryMedia,
-      mediaList: allMediaItems,
-      category: catName,
-      categorySlug: categorySlug,
-      location: location.trim() || "Global",
-      author: {
-        name: authorName.trim() || "The Logion Journal Editorial",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-        role: "Contributing Essayist",
-      },
-      readTime: readTime || stats.readingTime || "3 min read",
-      featured: featured,
-    });
+    try {
+      await addArticle({
+        title: title.trim(),
+        slug: slug.trim() || `story-${Date.now()}`,
+        excerpt: finalExcerpt,
+        content: paragraphs,
+        image: primaryMedia,
+        mediaList: allMediaItems,
+        category: catName,
+        categorySlug: categorySlug,
+        location: location.trim() || "Global",
+        author: {
+          name: authorName.trim() || "The Logion Journal Editorial",
+          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+          role: "Contributing Essayist",
+        },
+        readTime: readTime || stats.readingTime || "3 min read",
+        featured: featured,
+      });
 
-    setIsSubmitting(false);
-    router.push("/admin/posts");
+      setIsSubmitting(false);
+      router.push("/admin/posts");
+    } catch (err: any) {
+      setIsSubmitting(false);
+      alert(`Could not save story: ${err?.message || "Database connection error"}. Please try again.`);
+    }
   };
 
   const previewParagraphs = textToParagraphs(bodyText);
