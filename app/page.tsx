@@ -5,7 +5,12 @@ import { SearchBar } from "@/components/search/SearchBar";
 import { FeaturedSection } from "@/components/blog/FeaturedSection";
 import { ArticleGrid } from "@/components/blog/ArticleGrid";
 import { ArticleCard } from "@/components/blog/ArticleCard";
-import { TopLandscapeAd, DualPromoBanners } from "@/components/ads/CustomAdBanners";
+import {
+  TopLandscapeAd,
+  DualPromoBanners,
+  LogionHeaderBannerAd,
+  LogionFooterBannerAd,
+} from "@/components/ads/CustomAdBanners";
 import { useStore } from "@/lib/store";
 import { Brain, Coins, Feather, ArrowRight, Sparkles, MessageSquareQuote, Compass } from "lucide-react";
 import Link from "next/link";
@@ -36,6 +41,9 @@ export default function HomePage() {
 
       {/* 2. Prominent Search Bar */}
       <SearchBar />
+
+      {/* Header Responsive Banner Ad (Below Search Bar) */}
+      <LogionHeaderBannerAd />
 
       {/* 3. Top Promotional Banners (Coaching & Writer Submissions) */}
       <DualPromoBanners placementTitle="FEATURED INITIATIVES & EDITORIAL CALLS" />
@@ -136,6 +144,9 @@ export default function HomePage() {
           </div>
         </section>
       )}
+
+      {/* Footer Responsive Banner Ad (Above The Logion Journal Direct Helpdesk) */}
+      <LogionFooterBannerAd />
 
       {/* 9. Bottom Promotional & Direct Helpdesk Banners */}
       <DualPromoBanners placementTitle="THE LOGION JOURNAL DIRECT HELPDESK" />
