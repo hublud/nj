@@ -40,8 +40,8 @@ export async function GET(req: NextRequest) {
     .replace(/\s+/g, "-")
     .trim();
 
-  if (!cleanTitle) cleanTitle = "FunAllTheWay-Audio";
-  const filename = `${cleanTitle}-FunAllTheWay.mp3`;
+  if (!cleanTitle) cleanTitle = "LogionJournal-Audio";
+  const filename = `${cleanTitle}-LogionJournal.mp3`;
 
   try {
     const upstreamRes = await fetch(targetUrl, {

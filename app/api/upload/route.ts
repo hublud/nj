@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl =
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://gboczafpctiselwkxcvi.supabase.co";
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://gdwbajzlffpurfflzgja.supabase.co";
 const serviceKey =
   process.env.SUPABASE_SERVICE_ROLE_KEY ||
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
   "";
 
 export const maxDuration = 60; // Allow sufficient time for larger video uploads
@@ -48,12 +49,27 @@ export async function POST(req: NextRequest) {
     const supabaseAdmin = createClient(supabaseUrl, serviceKey);
 
     // Upload to Supabase Storage 'media' public bucket
-    const { error: uploadError } = await supabaseAdmin.storage
+    let { error: uploadError } = await supabaseAdmin.storage
       .from("media")
       .upload(filePath, buffer, {
         contentType: file.type || (isVideo ? "video/mp4" : "image/jpeg"),
         upsert: true,
       });
+
+    if (
+      uploadError &&
+      (uploadError.message?.includes("Bucket not found") ||
+        (uploadError as any).code === "NoSuchBucket")
+    ) {
+      await supabaseAdmin.storage.createBucket("media", { public: true });
+      const retry = await supabaseAdmin.storage
+        .from("media")
+        .upload(filePath, buffer, {
+          contentType: file.type || (isVideo ? "video/mp4" : "image/jpeg"),
+          upsert: true,
+        });
+      uploadError = retry.error;
+    }
 
     if (uploadError) {
       console.error("Supabase Storage upload error:", uploadError);

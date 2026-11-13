@@ -129,6 +129,10 @@ class DataStore {
   }
 
   private async fetchFromSupabase() {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    if (!url || url.includes("placeholder")) {
+      return;
+    }
     try {
       const { data: dbArticles, error: artErr } = await this.supabase
         .from("articles")
